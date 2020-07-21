@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+
+    <title>旋转的太极</title>
+    <style>* {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+
+        }
+
+        *::after {
+            box-sizing: border-box;
+        }
+
+        *::before {
+            box-sizing: border-box;
+        }
+
+        #html {
+            word-break: break-all;
+        }
+
+        #div1 {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+
+        }
+
+        @keyframes xuanzhuan {
+            from {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @media(max-width:500px) {
+            #html {
+                height: 60vh;
+                overflow: auto;
+            }
+
+            #div1Wrapper {
+                height: 40vh;
+            }
+
+            #div1 {
+                position: relative;
+                top: 10px;
+                right: 0;
+
+
+
+            }
+        }</style>
+</head>
+
+<body>
+    <div id="div1Wrapper">
+        <div id="div1"></div>
+    </div>
+    <div id="html"></div>
+
+    <style id="style"></style>
+    <script src="/main.1f19ae8e.js"></script>
+</body>
+
+</html>
