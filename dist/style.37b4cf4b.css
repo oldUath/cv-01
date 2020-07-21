@@ -1,0 +1,2 @@
+*{margin:0;padding:0}*,:after,:before{box-sizing:border-box}#html{word-break:break-all}#div1{position:fixed;top:20px}#div1Wrapper{width:200px;height:200px;position:fixed;top:0;left:50%;transform:translateX(-50%)}@keyframes xuanzhuan{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@media(max-width:500px){#html{height:60vh;overflow:auto}#bigdiv{height:40vh}#div1{position:relative;top:10px;right:0}}
+/*# sourceMappingURL=style.37b4cf4b.css.map */

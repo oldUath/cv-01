@@ -117,41 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"main.js":[function(require,module,exports) {
-var html = document.querySelector("#html");
-var css = document.querySelector("#style");
-var str = "\n /*\u5927\u5BB6\u597D\uFF0C\u6211\u662F\u4E00\u4E2A\u524D\u7AEF\u7A0B\u5E8F\u733F\n \u63A5\u4E0B\u6765\uFF0C\n \u6211\u8981\u5F00\u59CB\u753B\u4E00\u4E2A\u592A\u6781\u4E86\n \u9996\u5148\u51C6\u5907\u4E00\u4E2Adiv\n */\n    #div1 {\n        border: 1px solid red;\n        width: 200px;\n        height: 200px;\n    }\n /* \u628Adiv\u53D8\u6210\u4E00\u4E2A\u5706 \n \u80CC\u666F\u6E10\u53D8\n \u5DE6\u53F3\u9634\u9633\n */\n    #div1 {\n        border-radius: 50%;\n        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);\n        border: none;\n        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%,\n                rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 100%);\n\n    }\n /*\u5F00\u59CB\u5236\u4F5C\u9634\u9633\u773C\n */\n    #div1::before {\n        content: '';\n        display: block;\n        background-color: #fff;\n        width: 100px;\n        height: 100px;\n        position: relative;\n        top: 0;\n        left: 50%;\n        transform: translateX(-50%);\n        border-radius: 50%;\n        background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 25%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 100%);\n    }\n\n    #div1::after {\n        display: block;\n        content: '';\n        background-color: #000;\n        width: 100px;\n        height: 100px;\n        position: relative;\n        top: 0;\n        left: 50%;\n        transform: translateX(-50%);\n        border-radius: 50%;\n        background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 25%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 1) 100%);\n    }\n    /*\u8BA9\u592A\u6781\u65CB\u8F6C\u8D77\u6765*/\n    #div1{\n        animation: xuanzhuan 3s linear infinite;\n    }\n\n";
-var n = 0; // str2用于缓存
+})({"C:/Users/Uath/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-var str2 = ""; //使用递归调用，可以随意控制停止  
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
 
-var step = function step() {
-  setTimeout(function () {
-    if (str[n] === '\n') {
-      // 如果是回车就换行
-      str2 += "<br>";
-    } else if (str[n] === ' ') {
-      //如果是空格
-      str2 += "&nbsp;";
-    } else {
-      //如果不是就继续打字
-      str2 += str[n];
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"C:/Users/Uath/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
     }
 
-    html.innerHTML = str2;
-    css.innerHTML = str.substring(0, n);
-    window.scrollTo(0, 9999);
-    html.scrollTo(0, 99999);
+    cssTimeout = null;
+  }, 50);
+}
 
-    if (n + 1 < str.length) {
-      n = n + 1;
-      step();
-    }
-  }, 0);
-};
+module.exports = reloadCSS;
+},{"./bundle-url":"C:/Users/Uath/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/bundle-url.js"}],"style.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
 
-step();
-},{}],"C:/Users/Uath/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"C:/Users/Uath/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"C:/Users/Uath/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -355,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Uath/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js","main.js"], null)
-//# sourceMappingURL=/main.1f19ae8e.js.map
+},{}]},{},["C:/Users/Uath/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.e308ff8e.js.map

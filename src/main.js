@@ -21,6 +21,7 @@ let str = `
         border: none;
         background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%,
                 rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 100%);
+
     }
  /*开始制作阴阳眼
  */
@@ -55,6 +56,7 @@ let str = `
     #div1{
         animation: xuanzhuan 3s linear infinite;
     }
+
 `;
 
 let n = 0;
@@ -84,6 +86,6 @@ let step = () => {
             step();
         }
 
-    }, 20)
+    }, 0)
 }
 step();
